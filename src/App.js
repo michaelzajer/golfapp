@@ -1,5 +1,4 @@
 import { Authenticator } from '@aws-amplify/ui-react';
-
 import { Protected } from './components/Protected';
 import { RequireAuth } from './RequireAuth';
 import { Login } from './components/Login';
@@ -7,21 +6,11 @@ import { ProtectedSecond } from './components/ProtectSecond';
 import { Home } from './components/Home';
 import { Layout } from './components/Layout';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+//import Timer from './Timer';
 
 import "./App.css";
 
 import React from 'react';
-import logo from './golftriplogo.svg';
-import "@aws-amplify/ui-react/styles.css";
-import {
-  withAuthenticator,
-  Button,
-  Heading,
-  Image,
-  View,
-  Card,
- // Authenticator,
-} from "@aws-amplify/ui-react";
 
 function MyRoutes() {
   return (
@@ -51,13 +40,54 @@ function MyRoutes() {
     </BrowserRouter>
   );
 }
+/* Timer Code */
+
+const SECOND = 1000;
+const MINUTE = SECOND * 60;
+const HOUR = MINUTE * 60;
+const DAY = HOUR * 24;
+
+const Timer = ({ deadline = new Date().toString() }) => {
+  const parsedDeadline = React.useMemo(() => Date.parse(deadline), [deadline]);
+  const [time, setTime] = React.useState(parsedDeadline - Date.now());
+
+  React.useEffect(() => {
+    const interval = setInterval(
+      () => setTime(parsedDeadline - Date.now()),
+      1000
+    );
+
+    return () => clearInterval(interval);
+  }, [parsedDeadline]);
+
+  return (
+    <div className="timer">
+      {Object.entries({
+        Days: time / DAY,
+        Hours: (time / HOUR) % 24,
+        Minutes: (time / MINUTE) % 60,
+        Seconds: (time / SECOND) % 60
+      }).map(([label, value]) => (
+        <div key={label} className="col-4">
+          <div className="box">
+            <p>{`${Math.floor(value)}`.padStart(2, "0")}</p>
+            <span className="timer-text">{label}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 function App() {
   return (
     <Authenticator.Provider>
       <MyRoutes />
+      <Timer deadline="December, 31, 2023" />
+      
     </Authenticator.Provider>
   );
+
 }
 
 export default App;
