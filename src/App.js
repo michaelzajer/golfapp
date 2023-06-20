@@ -83,7 +83,7 @@ function App() {
   return (
     <Authenticator.Provider>
       <MyRoutes />
-      <Timer deadline="December, 31, 2023" />
+      <Timer deadline="February, 9, 2024" />
       
     </Authenticator.Provider>
   );
