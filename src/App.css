@@ -7,12 +7,13 @@
   pointer-events: none;
 }
 
+/* Stop Home Page Animation
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+*/
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -35,4 +36,43 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+    background-color: #282c34;  
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+    line-height: var(--amplify-line-heights-medium);
+}
+
+.amplify-heading {
+  color: hsl(310.67deg 100% 76.12%);
+  line-height: var(--amplify-components-heading-line-height);
+  display: block;
+}
+
+.amplify-button {
+  color: hsl(83.6deg 100% 55.64% / 64%);
+}
+
+#root {
+  text-align: center;
+  margin: 1.2rem;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.hide-authenticated {
+  display: none;
 }
