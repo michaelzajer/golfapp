@@ -9,7 +9,8 @@ import {
   TextField,
   View,
 } from "@aws-amplify/ui-react";
-import { listNotes } from "../graphql/queries";
+
+import { listGolferDetailss, getGolferDetails } from "./graphql/queries";
 import {
   createNote as createNoteMutation,
   deleteNote as deleteNoteMutation,

@@ -1,0 +1,12 @@
+{
+  "resourceName": "golfappmz32876532",
+  "policyUUID": "1ad8e485",
+  "bucketName": "golfappmz32876532",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

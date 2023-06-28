@@ -16,5 +16,11 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolId": "string",
       "UserPoolName": "string"
     }
+  },
+  "storage": {
+    "golfappmz32876532": {
+      "BucketName": "string",
+      "Region": "string"
+    }
   }
 }
