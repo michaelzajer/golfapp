@@ -10,11 +10,8 @@ import {
   View,
 } from "@aws-amplify/ui-react";
 
-import { listGolferDetailss, getGolferDetails } from "./graphql/queries";
-import {
-  createNote as createNoteMutation,
-  deleteNote as deleteNoteMutation,
-} from "../graphql/mutations";
+import { listGolferDetails } from "../graphql/queries"
+import { createGolferDetails, deleteGolferDetails} from "../graphql/mutations"
 
 import { useAuthenticator, Heading } from '@aws-amplify/ui-react';
 
@@ -24,80 +21,88 @@ export function Protected() {
   const message =
     route === 'authenticated' ? 'FIRST PROTECTED ROUTE!' : 'Loading...';
 
-      const [notes, setNotes] = useState([]);
+      const [golferDetails, setGolferDetails] = useState([]);
     
       useEffect(() => {
-        fetchNotes();
+        fetchGolfers();
       }, []);
     
-      async function fetchNotes() {
-        const apiData = await API.graphql({ query: listNotes });
-        const notesFromAPI = apiData.data.listNotes.items;
-        setNotes(notesFromAPI);
+      async function fetchGolfers() {
+        const apiData = await API.graphql({ query: listGolferDetails });
+        const golferDetailsFromAPI = apiData.data.listGolferDetails.items;
+        setGolferDetails(golferDetailsFromAPI);
       }
     
-      async function createNote(event) {
+      async function createGolfer(event) {
         event.preventDefault();
         const form = new FormData(event.target);
         const data = {
-          name: form.get("name"),
-          description: form.get("description"),
+          firstName: form.get("firstName"),
+          lastName: form.get("lastName"),
+          mobileNumber: form.get('mobile'),
         };
         await API.graphql({
-          query: createNoteMutation,
+          query: createGolferDetails,
           variables: { input: data },
         });
-        fetchNotes();
+        fetchGolfers();
         event.target.reset();
       }
     
-      async function deleteNote({ id }) {
-        const newNotes = notes.filter((note) => note.id !== id);
-        setNotes(newNotes);
+      async function deleteGolfers({ id }) {
+        const newGolferDetails = golferDetails.filter((golfer) => golfer.id !== id);
+        setGolferDetails(newGolferDetails);
         await API.graphql({
-          query: deleteNoteMutation,
+          query: deleteGolferDetails,
           variables: { input: { id } },
         });
       }
 
   return (<><Heading level={1}>{message}</Heading><View className="App">
-    <Heading level={1}>My Notes App</Heading>
-    <View as="form" margin="3rem 0" onSubmit={createNote}>
+    <Heading level={1}>Golfer Details</Heading>
+    <View as="form" margin="3rem 0" onSubmit={createGolfer}>
       <Flex direction="row" justifyContent="center">
         <TextField
-          name="name"
-          placeholder="Note Name"
-          label="Note Name"
+          name="firstName"
+          placeholder="firstName"
+          label="firstName"
           labelHidden
           variation="quiet"
           required />
         <TextField
-          name="description"
-          placeholder="Note Description"
-          label="Note Description"
+          name="lastName"
+          placeholder="lastName"
+          label="lastName"
+          labelHidden
+          variation="quiet"
+          required />
+          <TextField
+          name="mobileNumber"
+          placeholder="mobileNumber"
+          label="mobileNumber"
           labelHidden
           variation="quiet"
           required />
         <Button type="submit" variation="primary">
-          Create Note
+          Create Golfer
         </Button>
       </Flex>
     </View>
-    <Heading level={2}>Current Notes</Heading>
+    <Heading level={2}>Current Golfers</Heading>
     <View margin="3rem 0">
-      {notes.map((note) => (
+      {golferDetails.map((golfer) => (
         <Flex
-          key={note.id || note.name}
+          key={golfer.id || golfer.firstName}
           direction="row"
           justifyContent="center"
           alignItems="center"
         >
           <Text as="strong" fontWeight={700}>
-            {note.name}
+            {golfer.firstName}
           </Text>
-          <Text as="span">{note.description}</Text>
-          <Button variation="link" onClick={() => deleteNote(note)}>
-            Delete note
+          <Text as="span">{golfer.lastName}</Text>
+          <Button variation="link" onClick={() => deleteGolfers(golfer)}>
+            Delete Golfer
           </Button>
         </Flex>
       ))}

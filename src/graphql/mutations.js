@@ -1,48 +1,48 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createNote = /* GraphQL */ `
-  mutation CreateNote(
-    $input: CreateNoteInput!
-    $condition: ModelNoteConditionInput
+export const createGolferDetails = /* GraphQL */ `
+  mutation CreateGolferDetails(
+    $input: CreateGolferDetailsInput!
+    $condition: ModelGolferDetailsConditionInput
   ) {
-    createNote(input: $input, condition: $condition) {
+    createGolferDetails(input: $input, condition: $condition) {
       id
-      name
-      description
-      image
+      firstName
+      lastName
+      mobileNumber
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const updateNote = /* GraphQL */ `
-  mutation UpdateNote(
-    $input: UpdateNoteInput!
-    $condition: ModelNoteConditionInput
+export const updateGolferDetails = /* GraphQL */ `
+  mutation UpdateGolferDetails(
+    $input: UpdateGolferDetailsInput!
+    $condition: ModelGolferDetailsConditionInput
   ) {
-    updateNote(input: $input, condition: $condition) {
+    updateGolferDetails(input: $input, condition: $condition) {
       id
-      name
-      description
-      image
+      firstName
+      lastName
+      mobileNumber
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const deleteNote = /* GraphQL */ `
-  mutation DeleteNote(
-    $input: DeleteNoteInput!
-    $condition: ModelNoteConditionInput
+export const deleteGolferDetails = /* GraphQL */ `
+  mutation DeleteGolferDetails(
+    $input: DeleteGolferDetailsInput!
+    $condition: ModelGolferDetailsConditionInput
   ) {
-    deleteNote(input: $input, condition: $condition) {
+    deleteGolferDetails(input: $input, condition: $condition) {
       id
-      name
-      description
-      image
+      firstName
+      lastName
+      mobileNumber
       createdAt
       updatedAt
       __typename
